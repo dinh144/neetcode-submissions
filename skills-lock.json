@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "algo-sensei": {
+      "source": "karanb192/algo-sensei",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "8c60a318d9d2631b1fab584f0c269725eca3286cd241ee1cd4e5910381521c28"
+    }
+  }
+}
