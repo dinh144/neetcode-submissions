@@ -9,7 +9,7 @@ Dinh's NeetCode.io Blind 75 practice. `Data Structures & Algorithms/<slug>/submi
 - Before every push: `git pull --rebase` (NeetCode.io pushes too).
 
 ## Commands
-- `due`: `git pull --rebase`, list `REVIEW.md` rows with due date ≤ today, then the first problem in the Blind 75 order with no folder in `Data Structures & Algorithms/`.
+- `due`: `git pull --rebase`, list `REVIEW.md` rows with due date ≤ today, then the next new problem = the lowest `#` in the Blind 75 order absent from the queue table's `#` column. If a slug folder exists with no row, ask Dinh to run `review <slug>` first.
 - `review <slug>` (Dinh calls it only after Accepted): `git pull --rebase`, read the highest `submission-N` of that slug, review correctness, Big-O vs optimal, edge cases, Python idiom. Ask whether hints or the solution were used, then update `REVIEW.md`, commit and push.
 
 ## REVIEW.md queue

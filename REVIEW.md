@@ -2,22 +2,22 @@
 
 Luật giai đoạn + lệnh `due` / `review <slug>`: xem `CLAUDE.md`. Giải lại từ trắng, không nhìn submission cũ.
 
-| Bài (slug) | Pattern | Dấu hiệu | Hint? | Giai đoạn | Hạn ôn |
-|---|---|---|---|---|---|
-| two-integer-sum | Hash map | cặp có tổng = target → lưu phần bù đã thấy | ? | ôn | 2026-09-15 |
-| is-palindrome | Two pointers | so hai đầu, bỏ ký tự không alnum | ? | ôn | 2026-09-15 |
-| buy-and-sell-crypto | Sliding window | mua trước bán sau → giữ đáy bên trái | ? | ôn | 2026-09-15 |
-| anagram-groups | Hash map | nhóm cùng ký tự → key = đếm 26 hoặc chuỗi sort | ? | ôn | 2026-09-16 |
-| three-integer-sum | Sort + two pointers | bộ ba tổng 0 không trùng → sort, cố định i, bỏ trùng | ? | ôn | 2026-09-16 |
-| climbing-stairs | 1-D DP | số cách tới bậc n = f(n-1) + f(n-2) | ? | ôn | 2026-09-16 |
-| top-k-elements-in-list | Bucket sort / heap | k phần tử tần suất cao nhất → bucket theo tần suất O(n) | ? | ôn | 2026-09-17 |
-| max-water-container | Two pointers | diện tích chặn bởi cột thấp → dời con trỏ thấp | ? | ôn | 2026-09-17 |
-| longest-substring-without-duplicates | Sliding window + set | chuỗi con không lặp → co trái khi trùng | ? | ôn | 2026-09-17 |
-| string-encode-and-decode | Length prefix | ghép list chuỗi an toàn → `len#chuỗi` | ? | ôn | 2026-09-18 |
-| products-of-array-discluding-self | Prefix / suffix | tích trừ chính nó, cấm chia → prefix × suffix | ? | ôn | 2026-09-18 |
-| duplicate-integer | Hash set | có phần tử lặp → set | ? | ôn | 2026-09-18 |
-| longest-consecutive-sequence | Hash set | dãy liên tiếp O(n) → chỉ đếm từ số không có n-1 | ? | ôn | 2026-09-19 |
-| is-anagram | Đếm tần suất | cùng ký tự cùng số lần → đếm 26 | ? | ôn | 2026-09-19 |
+| # | Bài (slug) | Pattern | Dấu hiệu | Hint? | Giai đoạn | Hạn ôn |
+|---|---|---|---|---|---|---|
+| 03 | two-integer-sum | Hash map | cặp có tổng = target → lưu phần bù đã thấy | ? | ôn | 2026-09-15 |
+| 09 | is-palindrome | Two pointers | so hai đầu, bỏ ký tự không alnum | ? | ôn | 2026-09-15 |
+| 12 | buy-and-sell-crypto | Sliding window | mua trước bán sau → giữ đáy bên trái | ? | ôn | 2026-09-15 |
+| 04 | anagram-groups | Hash map | nhóm cùng ký tự → key = đếm 26 hoặc chuỗi sort | ? | ôn | 2026-09-16 |
+| 10 | three-integer-sum | Sort + two pointers | bộ ba tổng 0 không trùng → sort, cố định i, bỏ trùng | ? | ôn | 2026-09-16 |
+| 49 | climbing-stairs | 1-D DP | số cách tới bậc n = f(n-1) + f(n-2) | ? | ôn | 2026-09-16 |
+| 05 | top-k-elements-in-list | Bucket sort / heap | k phần tử tần suất cao nhất → bucket theo tần suất O(n) | ? | ôn | 2026-09-17 |
+| 11 | max-water-container | Two pointers | diện tích chặn bởi cột thấp → dời con trỏ thấp | ? | ôn | 2026-09-17 |
+| 13 | longest-substring-without-duplicates | Sliding window + set | chuỗi con không lặp → co trái khi trùng | ? | ôn | 2026-09-17 |
+| 06 | string-encode-and-decode | Length prefix | ghép list chuỗi an toàn → `len#chuỗi` | ? | ôn | 2026-09-18 |
+| 07 | products-of-array-discluding-self | Prefix / suffix | tích trừ chính nó, cấm chia → prefix × suffix | ? | ôn | 2026-09-18 |
+| 01 | duplicate-integer | Hash set | có phần tử lặp → set | ? | ôn | 2026-09-18 |
+| 08 | longest-consecutive-sequence | Hash set | dãy liên tiếp O(n) → chỉ đếm từ số không có n-1 | ? | ôn | 2026-09-19 |
+| 02 | is-anagram | Đếm tần suất | cùng ký tự cùng số lần → đếm 26 | ? | ôn | 2026-09-19 |
 
 ## Thứ tự Blind 75
 
