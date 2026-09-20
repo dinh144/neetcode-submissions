@@ -27,3 +27,7 @@ _Avoid_: Full O(n log n) sorting when frequency bound is known
 **Prefix and Suffix Accumulation**:
 Precomputing running products or sums from both boundaries of an array to answer range queries in O(1) without division.
 _Avoid_: Nested product loops, floating point division
+
+**Guarded Decrement Pattern**:
+The technique of combining an O(1) length pre-check (`len(s) == len(t)`) with decrementing frequency counts during the second pass. Mismatch or zero count immediately aborts, guaranteeing that successfully completing the pass results in an exact zero balance without requiring an extra dictionary scan.
+_Avoid_: Second-pass dictionary scan or two separate frequency maps when lengths are already verified equal.

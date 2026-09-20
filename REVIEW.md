@@ -5,6 +5,7 @@ Luật giai đoạn + lệnh `due` / `review <slug>`: xem `CLAUDE.md`. Giải l�
 | # | Bài (slug) | Pattern | Dấu hiệu | Hint? | Giai đoạn | Hạn ôn | Phút |
 |---|---|---|---|---|---|---|---|
 | 01 | duplicate-integer | Hash set | có phần tử lặp → set | không | +30 | 2026-10-20 | 2 |
+| 02 | is-anagram | Frequency map | hoán vị cùng tần số ký tự → hash map / array 26 đếm trừ | không | +30 | 2026-10-20 | 3 |
 
 ## Mock
 
