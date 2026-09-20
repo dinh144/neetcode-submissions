@@ -1,0 +1,27 @@
+:root {
+  --bg: #09090b;
+  --card: #18181b;
+  --card-hover: #27272a;
+  --border: #27272a;
+  --border-subtle: #1f1f23;
+  --text: #fafafa;
+  --text-muted: #a1a1aa;
+  --accent: #3b82f6;
+  --accent-subtle: rgba(59, 130, 246, 0.15);
+  --success: #22c55e;
+  --success-bg: rgba(34, 197, 94, 0.12);
+  --error: #ef4444;
+  --error-bg: rgba(239, 68, 68, 0.12);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.01em;
+  line-height: 1.6;
+}
+
+code, pre, .font-mono {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+}

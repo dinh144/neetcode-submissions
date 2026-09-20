@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit 01: Arrays & Hashing Mental Models</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    :root {
+      --bg: #09090b;
+      --card: #18181b;
+      --border: #27272a;
+      --text: #fafafa;
+      --text-muted: #a1a1aa;
+      --accent: #3b82f6;
+      --success: #22c55e;
+      --error: #ef4444;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Geist', sans-serif;
+      letter-spacing: -0.01em;
+      line-height: 1.6;
+    }
+    code, pre, .font-mono {
+      font-family: 'Geist Mono', monospace;
+    }
+  </style>
+</head>
+<body class="min-h-screen p-6 md:p-12 max-w-4xl mx-auto space-y-12 bg-[#09090b] text-[#fafafa]">
+
+  <!-- Header -->
+  <header class="border-b border-zinc-800 pb-6 space-y-3">
+    <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-zinc-400">
+      <span class="px-2.5 py-0.5 rounded bg-zinc-900 border border-zinc-700 text-blue-400 font-semibold">Blind 75</span>
+      <span>•</span>
+      <span>Category 1: Arrays & Hashing</span>
+      <span>•</span>
+      <span>Unit 0001</span>
+    </div>
+    <h1 class="text-3xl font-semibold tracking-tight text-zinc-100">Arrays & Hashing: The Core Mental Models</h1>
+    <p class="text-sm text-zinc-400">
+      Nắm vững 3 cơ chế tư duy thị giác: Tra cứu phần bù O(1), Đếm tần suất bucket O(n), và Tích luỹ tiền tố/hậu tố trước khi code 8 bài đầu tiên.
+    </p>
+    <div class="pt-2 flex items-center gap-3 text-xs text-zinc-400">
+      <span>Tham khảo hoạt họa:</span>
+      <a href="https://github.com/MisterBooo/LeetCodeAnimation" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline flex items-center gap-1 font-mono">
+        MisterBooo/LeetCodeAnimation (GitHub) ↗
+      </a>
+      <span>•</span>
+      <a href="https://neetcode.io/practice/practice/blind75" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline font-mono">
+        NeetCode.io Blind 75 ↗
+      </a>
+    </div>
+  </header>
+
+  <!-- Cognitive Stepper: 3 Core Models -->
+  <section class="space-y-6">
+    <div class="flex items-center justify-between">
+      <h2 class="text-lg font-medium text-zinc-200">3 Mô hình Trực giác Cốt lõi (Cognitive Stepper)</h2>
+      <span class="text-xs font-mono text-zinc-500">Foundation 01–08</span>
+    </div>
+    <div class="grid gap-4">
+      
+      <!-- Stepper Item 1 -->
+      <div class="p-5 rounded-xl bg-zinc-900/70 border border-zinc-800 hover:border-zinc-700 transition-colors space-y-2">
+        <div class="flex items-start gap-3">
+          <span class="w-6 h-6 rounded-full bg-blue-950 border border-blue-800 text-xs font-mono flex items-center justify-center text-blue-300 shrink-0">1</span>
+          <div>
+            <h3 class="text-sm font-semibold text-zinc-100">Mô hình Tra cứu Phần bù (Complement Lookup) — O(n) Time / O(n) Space</h3>
+            <p class="text-xs text-zinc-400 mt-1 leading-relaxed">
+              Thay vì dùng 2 vòng lặp lồng nhau $O(n^2)$ để tìm cặp số có tổng bằng <code>target</code>, ta đổi không gian bộ nhớ lấy thời gian. Khi duyệt tới <code>x</code>, giá trị ta cần tìm là <code>target - x</code>. Nếu phần bù đã có trong Hash Map thì kết thúc ngay; nếu chưa có, ghi nhớ <code>hashmap[x] = index</code> cho các phần tử phía sau tìm lại.
+            </p>
+            <div class="mt-2 text-[11px] font-mono text-zinc-400">Áp dụng: 01 Contains Duplicate, 03 Two Sum</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stepper Item 2 -->
+      <div class="p-5 rounded-xl bg-zinc-900/70 border border-zinc-800 hover:border-zinc-700 transition-colors space-y-2">
+        <div class="flex items-start gap-3">
+          <span class="w-6 h-6 rounded-full bg-purple-950 border border-purple-800 text-xs font-mono flex items-center justify-center text-purple-300 shrink-0">2</span>
+          <div>
+            <h3 class="text-sm font-semibold text-zinc-100">Đếm Tần suất & Phân loại Thùng (Frequency Counting & Bucket Sort) — O(n)</h3>
+            <p class="text-xs text-zinc-400 mt-1 leading-relaxed">
+              Với chuỗi ký tự ASCII thường, mảng 26 số nguyên là chiếc khóa nhận diện duy nhất cho mọi Anagram mà không cần sort $O(k \log k)$. Đối với bài toán Top-K phần tử, số lần xuất hiện tối đa của một số là $n$; do đó ta tạo $n+1$ thùng (buckets) theo tần suất để thu về kết quả $O(n)$ tuyến tính thay vì dùng Max-Heap $O(n \log k)$.
+            </p>
+            <div class="mt-2 text-[11px] font-mono text-zinc-400">Áp dụng: 02 Valid Anagram, 04 Group Anagrams, 05 Top K Frequent</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stepper Item 3 -->
+      <div class="p-5 rounded-xl bg-zinc-900/70 border border-zinc-800 hover:border-zinc-700 transition-colors space-y-2">
+        <div class="flex items-start gap-3">
+          <span class="w-6 h-6 rounded-full bg-emerald-950 border border-emerald-800 text-xs font-mono flex items-center justify-center text-emerald-300 shrink-0">3</span>
+          <div>
+            <h3 class="text-sm font-semibold text-zinc-100">Tích Tiền tố / Hậu tố & Biên giới Tập hợp (Prefix/Suffix & Boundary)</h3>
+            <p class="text-xs text-zinc-400 mt-1 leading-relaxed">
+              Khi bài toán cấm phép chia (Product Except Self), ta chia bài toán thành 2 lượt quét: lượt 1 tính tích dồn từ trái qua, lượt 2 nhân dồn từ phải về. Đối với bài toán dãy số liên tiếp (Longest Consecutive), chỉ bắt đầu đếm khi số hiện tại là điểm khởi đầu ($x - 1$ không nằm trong Hash Set), đảm bảo mỗi phần tử chỉ được duyệt tối đa 2 lần.
+            </p>
+            <div class="mt-2 text-[11px] font-mono text-zinc-400">Áp dụng: 07 Product Except Self, 08 Longest Consecutive Sequence</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Interactive Visualizer: Two Sum Animation Stepper -->
+  <section class="space-y-4">
+    <div class="flex items-center justify-between">
+      <div>
+        <h2 class="text-lg font-medium text-zinc-200">Diễn họa Trực quan Tương tác: Complement Hash Map (Two Sum)</h2>
+        <p class="text-xs text-zinc-400">Mô phỏng chuyển động từng bước của con trỏ và bảng băm (lấy cảm hứng từ LeetCodeAnimation)</p>
+      </div>
+      <div class="flex gap-2">
+        <button id="prevBtn" onclick="prevStep()" class="px-3 py-1 text-xs rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 transition">Lùi lại</button>
+        <button id="nextBtn" onclick="nextStep()" class="px-3 py-1 text-xs rounded bg-blue-600 hover:bg-blue-500 text-white font-medium border border-blue-500 transition">Bước tiếp</button>
+        <button id="resetBtn" onclick="resetSteps()" class="px-3 py-1 text-xs rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-400 border border-zinc-700 transition">Reset</button>
+      </div>
+    </div>
+
+    <!-- Visualizer Canvas -->
+    <div class="p-6 rounded-xl bg-zinc-900 border border-zinc-800 space-y-6">
+      <div class="flex items-center justify-between text-xs text-zinc-400 border-b border-zinc-800 pb-3 font-mono">
+        <div>Mục tiêu: <span class="text-blue-400 font-semibold">target = 9</span></div>
+        <div id="stepCounter" class="text-zinc-300">Trạng thái: Bước 0 / 2</div>
+      </div>
+
+      <!-- Dynamic Inline SVG -->
+      <div class="overflow-x-auto flex justify-center py-2">
+        <svg id="visualizerSvg" width="620" height="230" viewBox="0 0 620 230" class="select-none font-mono">
+          <!-- Array Container -->
+          <g id="arrayGroup">
+            <text x="30" y="32" fill="#71717a" font-size="12">Mảng nums:</text>
+            
+            <!-- Cell 0: val 2 -->
+            <g id="cell-0">
+              <rect x="30" y="45" width="70" height="50" rx="8" fill="#18181b" stroke="#27272a" stroke-width="2"/>
+              <text x="65" y="76" fill="#fafafa" font-size="16" font-weight="600" text-anchor="middle">2</text>
+              <text x="65" y="112" fill="#71717a" font-size="11" text-anchor="middle">idx 0</text>
+            </g>
+            
+            <!-- Cell 1: val 7 -->
+            <g id="cell-1">
+              <rect x="120" y="45" width="70" height="50" rx="8" fill="#18181b" stroke="#27272a" stroke-width="2"/>
+              <text x="155" y="76" fill="#fafafa" font-size="16" font-weight="600" text-anchor="middle">7</text>
+              <text x="155" y="112" fill="#71717a" font-size="11" text-anchor="middle">idx 1</text>
+            </g>
+
+            <!-- Cell 2: val 11 -->
+            <g id="cell-2">
+              <rect x="210" y="45" width="70" height="50" rx="8" fill="#18181b" stroke="#27272a" stroke-width="2"/>
+              <text x="245" y="76" fill="#fafafa" font-size="16" font-weight="600" text-anchor="middle">11</text>
+              <text x="245" y="112" fill="#71717a" font-size="11" text-anchor="middle">idx 2</text>
+            </g>
+
+            <!-- Cell 3: val 15 -->
+            <g id="cell-3">
+              <rect x="300" y="45" width="70" height="50" rx="8" fill="#18181b" stroke="#27272a" stroke-width="2"/>
+              <text x="335" y="76" fill="#fafafa" font-size="16" font-weight="600" text-anchor="middle">15</text>
+              <text x="335" y="112" fill="#71717a" font-size="11" text-anchor="middle">idx 3</text>
+            </g>
+          </g>
+
+          <!-- Pointer Indicator -->
+          <g id="pointerGroup" transform="translate(65, 30)">
+            <polygon points="-6,-10 6,-10 0,-2" fill="#3b82f6"/>
+            <text x="0" y="-14" fill="#3b82f6" font-size="11" text-anchor="middle">con trỏ i</text>
+          </g>
+
+          <!-- Hash Map Box -->
+          <g transform="translate(410, 25)">
+            <rect x="0" y="0" width="180" height="175" rx="10" fill="#18181b" stroke="#27272a" stroke-width="2"/>
+            <text x="20" y="26" fill="#a1a1aa" font-size="12" font-weight="600">Hash Map {num: idx}</text>
+            <line x1="15" y1="36" x2="165" y2="36" stroke="#27272a" stroke-width="1"/>
+            
+            <g id="mapContent">
+              <text id="mapEmptyText" x="90" y="90" fill="#52525b" font-size="12" text-anchor="middle">(rỗng)</text>
+              <g id="mapEntry0" opacity="0">
+                <rect x="15" y="48" width="150" height="30" rx="6" fill="#27272a" stroke="#3b82f6"/>
+                <text x="25" y="68" fill="#60a5fa" font-size="12">Key: 2 → Idx: 0</text>
+              </g>
+            </g>
+          </g>
+
+          <!-- Bottom Explanation Banner -->
+          <g transform="translate(30, 160)">
+            <rect x="0" y="0" width="340" height="40" rx="6" fill="#18181b" stroke="#27272a"/>
+            <text id="explanationText" x="15" y="25" fill="#a1a1aa" font-size="11">Nhấn 'Bước tiếp' để bắt đầu duyệt mảng.</text>
+          </g>
+        </svg>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Interactive Inline SVG Diagram (archify pattern) -->
+  <section class="space-y-4">
+    <h2 class="text-lg font-medium text-zinc-200">Kiến trúc Luồng Dữ liệu: Phân loại Thuật toán theo Dấu hiệu</h2>
+    <div class="p-6 rounded-xl bg-zinc-900 border border-zinc-800 flex justify-center">
+      <svg width="680" height="170" viewBox="0 0 680 170" class="select-none font-mono">
+        <!-- Node 1: Input -->
+        <rect x="20" y="60" width="140" height="50" rx="8" fill="#18181b" stroke="#3b82f6" stroke-width="2"/>
+        <text x="90" y="85" fill="#fafafa" font-size="12" font-weight="600" text-anchor="middle">Array / String</text>
+        <text x="90" y="100" fill="#93c5fd" font-size="10" text-anchor="middle">Input data</text>
+
+        <!-- Arrow 1 to Decision -->
+        <line x1="160" y1="85" x2="210" y2="85" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+
+        <!-- Decision Diamond -->
+        <polygon points="260,50 310,85 260,120 210,85" fill="#18181b" stroke="#a855f7" stroke-width="2"/>
+        <text x="260" y="88" fill="#d8b4fe" font-size="10" font-weight="600" text-anchor="middle">Dấu hiệu?</text>
+
+        <!-- Branch 1: Pair / Target -->
+        <line x1="285" y1="67" x2="370" y2="35" stroke="#71717a" stroke-width="1.5"/>
+        <rect x="370" y="15" width="280" height="40" rx="6" fill="#18181b" stroke="#27272a"/>
+        <text x="380" y="32" fill="#60a5fa" font-size="11" font-weight="600">Cặp có tổng = target / Kiểm tra trùng</text>
+        <text x="380" y="47" fill="#a1a1aa" font-size="10">→ Hash Set / Hash Map O(1) tra cứu phần bù</text>
+
+        <!-- Branch 2: Anagram / Frequency -->
+        <line x1="310" y1="85" x2="370" y2="85" stroke="#71717a" stroke-width="1.5"/>
+        <rect x="370" y="65" width="280" height="40" rx="6" fill="#18181b" stroke="#27272a"/>
+        <text x="380" y="82" fill="#c084fc" font-size="11" font-weight="600">Đếm ký tự, Top-K tần suất</text>
+        <text x="380" y="97" fill="#a1a1aa" font-size="10">→ Array count 26 hoặc Bucket Sort O(n)</text>
+
+        <!-- Branch 3: Discluding self -->
+        <line x1="285" y1="103" x2="370" y2="135" stroke="#71717a" stroke-width="1.5"/>
+        <rect x="370" y="115" width="280" height="40" rx="6" fill="#18181b" stroke="#27272a"/>
+        <text x="380" y="132" fill="#34d399" font-size="11" font-weight="600">Tích trừ chính nó (cấm chia)</text>
+        <text x="380" y="147" fill="#a1a1aa" font-size="10">→ 2 lượt quét Prefix & Suffix O(n) Time / O(1) Extra Space</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Active Recall Quiz Widget -->
+  <section class="space-y-4">
+    <div class="flex items-center justify-between">
+      <h2 class="text-lg font-medium text-zinc-200">Active Recall Quiz</h2>
+      <span class="text-xs font-mono text-zinc-500">Kiểm tra tức thì</span>
+    </div>
+    <div class="p-6 rounded-xl bg-zinc-900 border border-zinc-800 space-y-4" id="quiz-container">
+      <p class="text-sm font-medium text-zinc-200" id="quiz-question">
+        Trong bài toán Two Sum, vì sao kỹ thuật Complement Hash Map đạt độ phức tạp O(n) thay vì O(n²) của Brute Force?
+      </p>
+      <div class="grid gap-2" id="quiz-options">
+        <button onclick="checkAnswer(this, true, 'Bảng băm cho phép tra cứu phần bù (target - x) trung bình trong O(1), biến vòng lặp duyệt thứ hai thành một thao tác tra cứu bộ nhớ tức thì.')" class="w-full text-left p-3.5 rounded-lg bg-zinc-800/80 border border-zinc-700 hover:border-zinc-600 hover:bg-zinc-800 transition text-xs text-zinc-200">
+          Tra cứu phần bù trong bảng băm chỉ tốn O(1) thời gian trung bình.
+        </button>
+        <button onclick="checkAnswer(this, false, 'Sắp xếp mảng tốn ít nhất O(n log n) thời gian và làm thay đổi chỉ số ban đầu của bài toán.')" class="w-full text-left p-3.5 rounded-lg bg-zinc-800/80 border border-zinc-700 hover:border-zinc-600 hover:bg-zinc-800 transition text-xs text-zinc-200">
+          Sắp xếp toàn bộ mảng đầu vào trước giúp việc tìm kiếm nhị phân O(1).
+        </button>
+        <button onclick="checkAnswer(this, false, 'Hai con trỏ chỉ áp dụng hiệu quả khi mảng đã được sắp xếp tăng dần từ trước.')" class="w-full text-left p-3.5 rounded-lg bg-zinc-800/80 border border-zinc-700 hover:border-zinc-600 hover:bg-zinc-800 transition text-xs text-zinc-200">
+          Dùng hai con trỏ di chuyển đồng thời từ hai đầu mảng chưa sắp xếp.
+        </button>
+        <button onclick="checkAnswer(this, false, 'Chia đôi mảng song song không giải quyết được các cặp số nằm ở hai nửa phân vùng khác nhau.')" class="w-full text-left p-3.5 rounded-lg bg-zinc-800/80 border border-zinc-700 hover:border-zinc-600 hover:bg-zinc-800 transition text-xs text-zinc-200">
+          Chia đôi mảng thành hai nửa bằng nhau để duyệt song song đa luồng.
+        </button>
+      </div>
+      <div id="quiz-feedback" class="hidden p-3.5 rounded-lg text-xs leading-relaxed"></div>
+    </div>
+  </section>
+
+  <!-- Next Step Directive -->
+  <footer class="border-t border-zinc-800 pt-6 text-xs text-zinc-500 flex justify-between items-center">
+    <div>Lộ trình tiếp theo: <code>neetcode due</code> → Giải bài <strong>01 Contains Duplicate</strong> trên neetcode.io</div>
+    <div class="font-mono">Unit 0001 Verified</div>
+  </footer>
+
+  <script>
+    // Quiz handler
+    function checkAnswer(btn, isCorrect, explanation) {
+      const feedback = document.getElementById('quiz-feedback');
+      const allBtns = document.querySelectorAll('#quiz-options button');
+      allBtns.forEach(b => b.disabled = true);
+      
+      feedback.classList.remove('hidden');
+      if (isCorrect) {
+        btn.classList.add('bg-emerald-950/60', 'border-emerald-500/50', 'text-emerald-300');
+        feedback.className = 'p-3.5 rounded-lg text-xs bg-emerald-950/40 border border-emerald-800/60 text-emerald-300';
+        feedback.innerHTML = '<strong>Đúng!</strong> ' + explanation;
+      } else {
+        btn.classList.add('bg-rose-950/60', 'border-rose-500/50', 'text-rose-300');
+        feedback.className = 'p-3.5 rounded-lg text-xs bg-rose-950/40 border border-rose-800/60 text-rose-300';
+        feedback.innerHTML = '<strong>Chưa chính xác.</strong> ' + explanation;
+      }
+    }
+
+    // Two Sum Visualizer State Machine
+    let currentStep = 0;
+    const totalSteps = 2;
+
+    function updateVisualizer() {
+      const pointer = document.getElementById('pointerGroup');
+      const explanation = document.getElementById('explanationText');
+      const counter = document.getElementById('stepCounter');
+      const cell0 = document.querySelector('#cell-0 rect');
+      const cell1 = document.querySelector('#cell-1 rect');
+      const mapEmpty = document.getElementById('mapEmptyText');
+      const mapEntry0 = document.getElementById('mapEntry0');
+
+      counter.textContent = `Trạng thái: Bước ${currentStep} / ${totalSteps}`;
+
+      if (currentStep === 0) {
+        pointer.setAttribute('transform', 'translate(65, 30)');
+        cell0.setAttribute('stroke', '#3b82f6');
+        cell0.setAttribute('fill', '#1e293b');
+        cell1.setAttribute('stroke', '#27272a');
+        cell1.setAttribute('fill', '#18181b');
+        mapEmpty.style.display = 'block';
+        mapEntry0.setAttribute('opacity', '0');
+        explanation.textContent = 'i=0, num=2. Cần phần bù: 9-2=7. 7 có trong Hash Map? Chưa có.';
+      } else if (currentStep === 1) {
+        pointer.setAttribute('transform', 'translate(65, 30)');
+        cell0.setAttribute('stroke', '#3b82f6');
+        cell0.setAttribute('fill', '#1e293b');
+        cell1.setAttribute('stroke', '#27272a');
+        cell1.setAttribute('fill', '#18181b');
+        mapEmpty.style.display = 'none';
+        mapEntry0.setAttribute('opacity', '1');
+        explanation.textContent = 'Lưu {2: 0} vào Hash Map. Chuẩn bị dịch con trỏ sang phải.';
+      } else if (currentStep === 2) {
+        pointer.setAttribute('transform', 'translate(155, 30)');
+        cell0.setAttribute('stroke', '#10b981');
+        cell0.setAttribute('fill', '#064e3b');
+        cell1.setAttribute('stroke', '#10b981');
+        cell1.setAttribute('fill', '#064e3b');
+        mapEmpty.style.display = 'none';
+        mapEntry0.setAttribute('opacity', '1');
+        explanation.textContent = 'i=1, num=7. Cần phần bù: 9-7=2. 2 có trong Map tại index 0! Trả về [0, 1].';
+      }
+    }
+
+    function nextStep() {
+      if (currentStep < totalSteps) {
+        currentStep++;
+        updateVisualizer();
+      }
+    }
+
+    function prevStep() {
+      if (currentStep > 0) {
+        currentStep--;
+        updateVisualizer();
+      }
+    }
+
+    function resetSteps() {
+      currentStep = 0;
+      updateVisualizer();
+    }
+
+    // Initialize state
+    updateVisualizer();
+  </script>
+</body>
+</html>
